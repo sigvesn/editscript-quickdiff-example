@@ -22,7 +22,7 @@
                                   new))]
   (write-diff diff "out/diff.json"))
 
-(def old-non-active (map #(dissoc % :active) old))
+(def old-non-active (mapv #(dissoc % :active) old))
 (println "Running the :quick diff algorithm, but without the :active field in 'old'")
 (let [diff (time (editscript/diff old-non-active
                                   new
@@ -87,7 +87,7 @@
 (let [diff (time (editscript/diff old
                                   new
                                   {:algo :quick
-                                   :vec-timeout 100
+                                   :vec-timeout 60
                                    :str-diff :character}))]
   (write-diff diff "out/diff_quick_char_timeout.json"))
 
